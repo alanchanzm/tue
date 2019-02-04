@@ -41,3 +41,5 @@ def(arrayProto, '$remove', function $remove(item) {
   const index = this.indexOf(item);
   if (~index) return this.splice(index, 1);
 });
+
+export { arrayProto, arrayMethods };

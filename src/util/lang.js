@@ -1,4 +1,17 @@
 /**
+ * Object.defineProperty 的代理方法，
+ * writable、configurable 默认设为 true
+ */
+function def(obj, key, value, enumerable = false) {
+  Object.defineProperty(obj, key, {
+    value,
+    enumerable,
+    writable: true,
+    configurable: true,
+  });
+}
+
+/**
  * Object.prototype.hasOwnProperty 的代理方法，
  * 判断是否对象自身是否存在某属性
  */
@@ -16,4 +29,4 @@ function isPlainObject(obj) {
   return Object.prototype.toString.call(obj) === OBJECT_STRING;
 }
 
-export { hasOwn, isArray, isPlainObject };
+export { def, hasOwn, isArray, isPlainObject };
