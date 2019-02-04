@@ -1,13 +1,27 @@
+let uid = 0;
 class Dep {
-  constructor() {}
+  constructor() {
+    this.id = uid;
+    uid += 1;
+    this.subs = [];
+  }
 
-  addSub() {}
+  addSub(sub) {
+    this.subs.push(sub);
+  }
 
-  removeSub() {}
+  removeSub(sub) {
+    this.subs.$remove(sub);
+  }
 
-  depend() {}
+  depend() {
+    Dep.target.addDep(this);
+  }
 
-  notify() {}
+  notify() {
+    const subs = this.subs.slice();
+    subs.forEach(sub => sub.update());
+  }
 }
 
 Dep.target = null;
