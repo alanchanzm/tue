@@ -1,3 +1,5 @@
 const hasProto = '__proto__' in {};
 
-export { hasProto };
+function nextTick() {}
+
+export { hasProto, nextTick };

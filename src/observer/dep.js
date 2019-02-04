@@ -6,6 +6,9 @@ class Dep {
     this.subs = [];
   }
 
+  /**
+   * @param { import("./watcher").Watcher } sub
+   */
   addSub(sub) {
     this.subs.push(sub);
   }
