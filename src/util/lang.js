@@ -11,6 +11,10 @@ function def(obj, key, value, enumerable = false) {
   });
 }
 
+function extend(to, from) {
+  return Object.assign(to, from);
+}
+
 /**
  * Object.prototype.hasOwnProperty 的代理方法，
  * 判断是否对象自身是否存在某属性
@@ -50,4 +54,4 @@ function isReserved(str) {
   return c === 0x24 || c === 0x5f;
 }
 
-export { def, hasOwn, hyphenate, isArray, isObject, isPlainObject, isReserved };
+export { def, extend, hasOwn, hyphenate, isArray, isObject, isPlainObject, isReserved };

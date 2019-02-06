@@ -1,13 +1,13 @@
 import config from '../config';
 import { Dep } from './dep';
 import { pushWatcher } from './batcher';
-import { isArray, isObject, warn, nextTick } from '../util';
+import { isArray, isObject, warn, nextTick, extend } from '../util';
 
 let uid = 0;
 
 class Watcher {
   constructor(vm, expOrFn, cb, options) {
-    if (options) Object.assign(this, options);
+    if (options) extend(this, options);
 
     const isFn = typeof expOrFn === 'function';
     this.vm = vm;
