@@ -1,4 +1,4 @@
-import { def } from '../util/index';
+import { def } from '../util';
 
 const { prototype: arrayProto } = Array;
 const arrayMethods = Object.create(arrayProto);

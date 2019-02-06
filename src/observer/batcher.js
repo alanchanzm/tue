@@ -1,4 +1,4 @@
-import { nextTick, warn } from '../util/index';
+import { nextTick, warn } from '../util';
 import config from '../config';
 
 let queueIndex;

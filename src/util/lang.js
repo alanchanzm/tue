@@ -42,4 +42,12 @@ function isPlainObject(obj) {
   return Object.prototype.toString.call(obj) === OBJECT_STRING;
 }
 
-export { def, hasOwn, hyphenate, isArray, isObject, isPlainObject };
+/**
+ * 判断字符串是否以 $ 或 _ 开头
+ */
+function isReserved(str) {
+  const c = `${str}`.charCodeAt(0);
+  return c === 0x24 || c === 0x5f;
+}
+
+export { def, hasOwn, hyphenate, isArray, isObject, isPlainObject, isReserved };

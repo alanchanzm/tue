@@ -1,6 +1,6 @@
 import { Dep } from './dep';
 import { arrayMethods } from './array';
-import { def, hasOwn, hasProto, isArray, isPlainObject } from '../util/index';
+import { def, hasOwn, hasProto, isArray, isPlainObject } from '../util';
 
 const arrayKeys = Object.getOwnPropertyNames(arrayMethods);
 const shouldConvert = true;
