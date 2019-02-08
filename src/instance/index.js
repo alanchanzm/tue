@@ -28,6 +28,7 @@ class Component {
     this._watcher = new Watcher(this, render, this._update);
     this._update(this._watcher.value);
   }
+
   _proxy(key) {
     if (isReserved(key)) return;
 
@@ -50,7 +51,6 @@ class Component {
         dynamic = '';
         break;
       case typeof dynamic === 'string':
-        dynamic = dynamic;
         break;
       default:
         dynamic = Object.keys(dynamic)

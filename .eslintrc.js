@@ -13,5 +13,6 @@ module.exports = {
     'no-param-reassign': 0,
     'no-use-before-define': ['error', { functions: false }],
     'no-continue': 0,
+    'class-methods-use-this': 0,
   },
 };
