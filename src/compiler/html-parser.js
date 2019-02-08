@@ -23,7 +23,55 @@ let IS_REGEX_CAPTURING_BROKEN = false;
   IS_REGEX_CAPTURING_BROKEN = g === '';
 });
 
-function parse(html) {}
+function parse(html) {
+  let root;
+  let currentParent;
+  const stack = [];
+
+  HTMLParser(html, {
+    html5: true,
+    start(tag, attrs, unary) {
+      const element = {
+        tag,
+        attrs,
+        attrsMap: makeAttrsMap(attrs),
+        parent: currentParent,
+        children: [],
+      };
+
+      if (!root) root = element;
+
+      if (currentParent) currentParent.children.push(element);
+
+      if (!unary) {
+        currentParent = element;
+        stack.push(element);
+      }
+    },
+    end() {
+      stack.length -= 1;
+      currentParent = stack[stack.length - 1];
+    },
+    /**
+     * @param {string} text
+     */
+    chars(text) {
+      text = currentParent.tag === 'pre' || text.trim() ? text : ' ';
+      currentParent.children.push(text);
+    },
+    comment() {},
+  });
+
+  return root;
+}
+
+function makeAttrsMap(attrs) {
+  const map = {};
+  for (const attr of attrs) {
+    map[attr.name] = attr.value;
+  }
+  return map;
+}
 
 // Empty Elements
 const empty = makeMap(
