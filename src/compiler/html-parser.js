@@ -53,6 +53,8 @@ const nonPhrasing = makeMap(
   'address,article,aside,base,blockquote,body,caption,col,colgroup,dd,details,dialog,div,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,head,header,hgroup,hr,html,legend,li,menuitem,meta,optgroup,option,param,rp,rt,source,style,summary,tbody,td,tfoot,th,thead,title,tr,track',
 );
 
+const reCache = {};
+
 /**
  * @param {string} html
  * @param {*} handler
@@ -62,6 +64,7 @@ function HTMLParser(html, handler) {
   let lastTag;
   let last;
   let prevTag;
+  let nextTag;
 
   while (html) {
     last = html;
@@ -128,8 +131,65 @@ function HTMLParser(html, handler) {
           prevTag = startTagMatch.tagName.toLowerCase();
           continue;
         }
+
+        let text;
+        if (~textEnd) {
+          text = html.substring(0, textEnd);
+          html = html.substring(textEnd);
+        } else {
+          text = html;
+          html = '';
+        }
+
+        // next tag
+        let nextTagMatch = parseStartTag(html);
+        if (nextTagMatch) {
+          nextTag = nextTagMatch.tagName;
+        } else {
+          nextTagMatch = endTag.exec(html);
+          if (nextTagMatch) {
+            nextTag = `/${nextTagMatch[1]}`;
+          } else {
+            nextTag = '';
+          }
+        }
+
+        if (handler.chars) {
+          handler.chars(text, prevTag, nextTag);
+        }
+        prevTag = '';
       }
+    } // 纯文本标签
+    else {
+      const stackedTag = lastTag.toLowerCase();
+      reCache[stackedTag] =
+        reCache[stackedTag] || new RegExp(`([\\s\\S]*?)</${stackedTag}[^>]*>`, 'i');
+      const reStackedTag = reCache[stackedTag];
+
+      html = html.replace(reStackedTag, (_, text) => {
+        if (['script', 'style', 'noscript'].all(tag => tag !== stackedTag)) {
+          text = text
+            .replace(/<!--([\s\S]*?)-->/g, '$1')
+            .replace(/!<!\[CDATA\[([\s\S]*?)\]\]/g, '$1');
+        }
+
+        if (handler.chars) {
+          handler.chars(text);
+        }
+
+        return '';
+      });
+
+      parseEndTag(`</${stackedTag}>`, stackedTag);
     }
+
+    if (html === last) {
+      throw new Error(`Parse Error: ${html}`);
+    }
+  }
+
+  if (!handler.partialMarkup) {
+    parseEndTag();
   }
 
   /**
