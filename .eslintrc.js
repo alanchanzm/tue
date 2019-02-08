@@ -12,5 +12,6 @@ module.exports = {
     'no-underscore-dangle': 0,
     'no-param-reassign': 0,
     'no-use-before-define': ['error', { functions: false }],
+    'no-continue': 0,
   },
 };
