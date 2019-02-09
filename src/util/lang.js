@@ -46,6 +46,10 @@ function isPlainObject(obj) {
   return Object.prototype.toString.call(obj) === OBJECT_STRING;
 }
 
+function isPrimitive(s) {
+  return typeof s === 'string' || typeof s === 'number';
+}
+
 /**
  * 判断字符串是否以 $ 或 _ 开头
  */
@@ -54,4 +58,14 @@ function isReserved(str) {
   return c === 0x24 || c === 0x5f;
 }
 
-export { def, extend, hasOwn, hyphenate, isArray, isObject, isPlainObject, isReserved };
+export {
+  def,
+  extend,
+  hasOwn,
+  hyphenate,
+  isArray,
+  isObject,
+  isPlainObject,
+  isPrimitive,
+  isReserved,
+};
