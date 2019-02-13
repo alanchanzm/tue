@@ -1,4 +1,4 @@
-import { isValidArrayIndex } from '@/util';
+import { isValidArrayIndex } from '@/core/util';
 
 function set(target: Array<any> | Object, key: any, val: any) {
   if (Array.isArray(target) && isValidArrayIndex(key)) {

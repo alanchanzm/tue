@@ -1,4 +1,4 @@
-import { set, del } from '@/observer';
+import { set, del } from '@/core/observer';
 
 function stateMixin(Vue: Vue) {
   const dataDef = {

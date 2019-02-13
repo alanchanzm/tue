@@ -6,7 +6,7 @@ declare interface Vue extends Function {
   delete?: Function;
   nextTick?: Function;
   observable?: Function;
-  options: any; //TODO
+  options?: any; //TODO
   use?: Function;
   mixin?: Function;
   extend?: Function;

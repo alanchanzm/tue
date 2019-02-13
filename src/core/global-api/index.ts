@@ -1,6 +1,6 @@
-import config from '@/config';
-import { set, del } from '@/observer';
-import { nextTick, extend } from '@/util';
+import config from '@/core/config';
+import { set, del } from '@/core/observer';
+import { nextTick, extend } from '@/core/util';
 import { ASSET_TYPES } from '@/shared/constants';
 import * as buildInComponents from '@/core/components';
 import { initUse } from './use';
