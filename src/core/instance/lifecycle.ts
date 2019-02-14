@@ -1,7 +1,5 @@
-function lifecycleMixin(Vue: Vue) {
-  Vue.prototype._update = function() {};
-  Vue.prototype.$forceUpdate = function() {};
-  Vue.prototype.$destroy = function() {};
-}
+function _update() {}
+function $forceUpdate() {}
+function $destroy() {}
 
-export { lifecycleMixin };
+export { _update, $forceUpdate, $destroy };

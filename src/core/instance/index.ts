@@ -1,27 +1,50 @@
-import { initMixin } from './init';
-import { stateMixin } from './state';
-import { eventsMixin } from './events';
-import { lifecycleMixin } from './lifecycle';
-import { renderMixin } from './render';
+import { _init } from './init';
+import { $set, $delete, $watch } from './state';
+import { $on, $once, $off, $emit } from './events';
+import { _update, $forceUpdate, $destroy } from './lifecycle';
+import { $nextTick, _render } from './render';
 
-// function Vue(options: ComponentOptions) {
-//   this._init(options);
-// }
-
-class Vue implements Vue {
-  static options: any;
-  _init: Function;
-  __patch__?: Function;
-  $mount?: Function;
-  constructor(options: ComponentOptions) {
-    this._init(options);
-  }
+abstract class InitVue {
+  _data;
+  _props;
+  // init
+  _init = _init;
+  // state
+  $set = $set;
+  $delete = $delete;
+  $watch = $watch;
+  // events
+  $on = $on;
+  $once = $once;
+  $off = $off;
+  $emit = $emit;
+  // lifecycle
+  _update = _update;
+  $forceUpdate = $forceUpdate;
+  $destroy = $destroy;
+  // render
+  $nextTick = $nextTick;
+  _render = _render;
+  // for runtime
+  __patch__;
+  $mount;
 }
 
-initMixin(Vue);
-stateMixin(Vue);
-eventsMixin(Vue);
-lifecycleMixin(Vue);
-renderMixin(Vue);
+class Vue extends InitVue implements IVue {
+  static options: IVueOptions;
+
+  constructor(options: IVueOptions) {
+    super();
+    this._init(options);
+  }
+
+  get $data() {
+    return this._data;
+  }
+
+  get $props() {
+    return this._props;
+  }
+}
 
 export default Vue;

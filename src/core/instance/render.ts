@@ -1,10 +1,4 @@
-import { installRenderHelpers } from './render-helpers';
+function $nextTick() {}
+function _render() {}
 
-function renderMixin(Vue: Vue) {
-  installRenderHelpers(Vue.prototype);
-
-  Vue.prototype.$nextTick = function() {};
-  Vue.prototype._render = function() {};
-}
-
-export { renderMixin };
+export { $nextTick, _render };

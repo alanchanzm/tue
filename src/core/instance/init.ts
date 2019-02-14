@@ -1,5 +1,3 @@
-function initMixin(Vue: Vue) {
-  Vue.prototype._init = function(options?: ComponentOptions) {};
-}
+function _init(options?: IVueOptions) {}
 
-export { initMixin };
+export { _init };
