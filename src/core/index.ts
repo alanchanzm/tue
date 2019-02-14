@@ -1,4 +1,4 @@
-import Vue from '@/instance';
+import Vue from '@/core/instance';
 import { initGlobalAPI } from './global-api';
 
 initGlobalAPI(Vue);

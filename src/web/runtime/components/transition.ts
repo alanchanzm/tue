@@ -1,0 +1,3 @@
+const Transition = {};
+
+export { Transition };
