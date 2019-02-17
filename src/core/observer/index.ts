@@ -16,6 +16,6 @@ function set(target: Array<any> | Object, key: any, val: any) {
 
 function del() {}
 
-function observe() {}
+function observe(value: any, asRootData: boolean = false) {}
 
 export { set, del, observe };

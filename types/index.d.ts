@@ -1,14 +1,22 @@
 interface IVueOptions {
+  _isComponent: boolean;
   [key: string]: any;
 }
 
 interface IVueConstructor {
+  options;
+  super?;
   new (options: IVueOptions): any;
 }
 
-interface IVue {
+interface IVueModel {
+  _uid: number;
+  _isVue: boolean;
   _data: any;
   _props: any;
+  _watchers: any[];
+
+  $options: any;
   // options: IVueOptions;
   // init
   _init(options: IVueOptions): void;

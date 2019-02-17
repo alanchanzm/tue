@@ -5,8 +5,12 @@ import { _update, $forceUpdate, $destroy } from './lifecycle';
 import { $nextTick, _render } from './render';
 
 abstract class InitVue {
+  _uid: number;
+  _isVue = false;
   _data;
   _props;
+  _watchers;
+  $options;
   // init
   _init = _init;
   // state
@@ -30,8 +34,8 @@ abstract class InitVue {
   $mount;
 }
 
-class Vue extends InitVue implements IVue {
-  static options: IVueOptions;
+class VueCtor extends InitVue implements IVueModel {
+  static options;
 
   constructor(options: IVueOptions) {
     super();
@@ -45,6 +49,10 @@ class Vue extends InitVue implements IVue {
   get $props() {
     return this._props;
   }
+}
+
+function Vue(options: IVueOptions, Ctor: IVueConstructor = VueCtor): IVueModel {
+  return new Ctor(options);
 }
 
 export default Vue;

@@ -10,8 +10,22 @@ function extend(to: Object, _from: Object = {}): Object {
   return Object.assign(to, _from);
 }
 
+function makeMap(str: string, expectsLowerCase: boolean = false): Function {
+  const map = Object.create(null);
+  const list = str.split(',');
+  for (let key of list) {
+    map[key] = true;
+  }
+  return (val: string): boolean => {
+    const key = expectsLowerCase ? val.toLowerCase() : val;
+    return map[key] || false;
+  };
+}
+
+const isBuildInTag = makeMap('solt,component', true);
+
 const identity = (id: any) => id;
-const noop = () => {};
+const noop = (a?: any, b?: any, c?: any, d?: any) => {};
 const no = () => false;
 
-export { isValidArrayIndex, extend, identity, noop, no };
+export { isValidArrayIndex, extend, makeMap, isBuildInTag, identity, noop, no };
