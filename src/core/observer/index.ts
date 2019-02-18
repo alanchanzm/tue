@@ -1,4 +1,4 @@
-import { isValidArrayIndex } from '@/core/util';
+import { isValidArrayIndex, isObject } from '@/core/util';
 
 function set(target: Array<any> | Object, key: any, val: any) {
   if (Array.isArray(target) && isValidArrayIndex(key)) {
@@ -16,6 +16,16 @@ function set(target: Array<any> | Object, key: any, val: any) {
 
 function del() {}
 
-function observe(value: any, asRootData: boolean = false) {}
+class Observer {
+  private value: any;
+
+  constructor(value: any) {
+    this.value = value;
+  }
+}
+
+function observe(value: any, asRootData: boolean = false) {
+  if (!isObject(value)) return;
+}
 
 export { set, del, observe };

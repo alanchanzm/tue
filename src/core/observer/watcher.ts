@@ -1,7 +1,7 @@
 import config from '../config';
 import { Dep } from './dep';
 import { pushWatcher } from './batcher';
-import { isArray, isObject, warn, nextTick, extend } from '../util';
+import { isArray, isObject, warn, nextTick, extend } from '@/core/util';
 
 let uid = 0;
 

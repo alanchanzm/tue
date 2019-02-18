@@ -6,6 +6,10 @@ function isValidArrayIndex(val: any): boolean {
   return n >= 0 && Math.floor(n) === n && isFinite(val);
 }
 
+function isObject(obj: any) {
+  return obj !== null && typeof obj === 'object';
+}
+
 function extend(to: Object, _from: Object = {}): Object {
   return Object.assign(to, _from);
 }
@@ -28,4 +32,4 @@ const identity = (id: any) => id;
 const noop = (a?: any, b?: any, c?: any, d?: any) => {};
 const no = () => false;
 
-export { isValidArrayIndex, extend, makeMap, isBuildInTag, identity, noop, no };
+export { isValidArrayIndex, isObject, extend, makeMap, isBuildInTag, identity, noop, no };

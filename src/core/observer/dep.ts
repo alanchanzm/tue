@@ -1,8 +1,11 @@
 let uid = 0;
 class Dep {
+  static target: any;
+  id: number;
+  subs: any[];
+
   constructor() {
     this.id = uid;
-    uid += 1;
     this.subs = [];
   }
 
