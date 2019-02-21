@@ -2,8 +2,8 @@
  * @file Vue类
  */
 
-import * as Directives from './directives';
-import * as Filters from './filters';
+import { Directives } from './directives';
+import { Filters } from './filters';
 
 /**
  * 前缀
@@ -138,10 +138,17 @@ function parseDirective(attr) {
 }
 
 /**
+ * Binding 对象
+ * @typedef {Object} Binding
+ * @property {*} value
+ * @property {Array.<Directive>} directives
+ */
+
+/**
  *
  * @param {Vue} vue
  * @param {Element} el
- * @param {*} bindings
+ * @param {Array.<Binding>} bindings
  * @param {Directive} directive parseDirective's return
  */
 function bindDirective(vue, el, bindings, directive) {
@@ -157,6 +164,12 @@ function bindDirective(vue, el, bindings, directive) {
   if (!Object.prototype.hasOwnProperty.call(vue.scope, key)) bindAccessors(vue, key, binding);
 }
 
+/**
+ *
+ * @param {Vue} vue
+ * @param {string} key
+ * @param {Binding} binding
+ */
 function bindAccessors(vue, key, binding) {
   Object.defineProperty(vue.scope, key, {
     get() {
@@ -165,8 +178,8 @@ function bindAccessors(vue, key, binding) {
     set(newVal) {
       binding.value = newVal;
       binding.directives.forEach(directive => {
-        if (newVal && directive.filters) newVal = applyFilters(newVal, directive);
-        directive.update(directive.el, newVal, directive.argument, directive, vue);
+        const filteredVal = newVal && directive.filters ? applyFilters(newVal, directive) : newVal;
+        directive.update(directive.el, filteredVal, directive.argument, directive, vue);
       });
     },
   });

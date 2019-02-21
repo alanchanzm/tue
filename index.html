@@ -6,7 +6,8 @@
   </head>
   <body>
     <div id="test" vue-on-click="changeMessage | .button">
-      <p vue-text="msg | capitalize"></p>
+      <p vue-text="msg.wow | capitalize"></p>
+      <p vue-text="msg.wow | uppercase"></p>
       <p vue-show="something">YOYOYO</p>
       <p class="button" vue-text="msg"></p>
       <p vue-class-red="error" vue-text="hello"></p>
@@ -17,9 +18,9 @@
       id: 'test',
       // template
       scope: {
-        msg: 'hello',
+        'msg.wow': 'hello',
         hello: 'WHWHWHW',
-        changeMessage: function() {
+        changeMessage() {
           app.scope.msg = 'hola';
         },
       },
