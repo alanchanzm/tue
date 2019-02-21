@@ -7,15 +7,18 @@ module.exports = {
   entry: path.resolve(__dirname, 'src/index.js'),
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'vue.js'
+    filename: 'vue.js',
+    library: 'Vue',
+    libraryTarget: 'umd',
   },
   module: {
-    rules: [{ test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }]
+    rules: [{ test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }],
   },
   plugins: [
     new HtmlWebPackPlugin({
+      title: 'Vue',
       template: './index.html',
-      filename: './index.html'
-    })
-  ]
+      filename: './index.html',
+    }),
+  ],
 };

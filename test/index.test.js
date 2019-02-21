@@ -1,5 +1,5 @@
-import { init } from '../src/index';
+import { capitalize } from '../src/filters';
 
-test('init', () => {
-  expect(init).toBe(42);
+test(`capitalize --- 'params' --- 'Params'`, () => {
+  expect(capitalize('params')).toBe('Params');
 });

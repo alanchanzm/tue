@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <title>title</title>
+    <meta charset="utf-8" />
   </head>
-  <body></body>
+  <body>
+    <div id="test" vue-on-click="changeMessage | .button">
+      <p vue-text="msg | capitalize"></p>
+      <p vue-show="something">YOYOYO</p>
+      <p class="button" vue-text="msg"></p>
+      <p vue-class-red="error" vue-text="hello"></p>
+    </div>
+  </body>
+  <script>
+    var app = Vue.create({
+      id: 'test',
+      // template
+      scope: {
+        msg: 'hello',
+        hello: 'WHWHWHW',
+        changeMessage: function() {
+          app.scope.msg = 'hola';
+        },
+      },
+    });
+    console.log(app);
+  </script>
 </html>

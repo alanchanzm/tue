@@ -38,7 +38,9 @@ class Vue {
    * @param {string} variable 模板字符串
    */
   bind(variable) {
+    // 这是一个 NodeList，不是数组，不具有数组方法
     this.bindings[variable].els = this.el.querySelectorAll(`[${bindingMark}="${variable}"]`);
+    // NodeList 的 forEach 是一个类似于 Array.prototype.forEach 的方法
     this.bindings[variable].els.forEach(element => element.removeAttribute(bindingMark));
 
     const get = () => this.bindings[variable].value;
