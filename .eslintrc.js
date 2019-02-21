@@ -28,5 +28,7 @@ module.exports = {
     'no-bitwise': 'off',
     // 取消缩进检测，由 Prettier 控制
     indent: 'off',
+    // 下划线命名
+    'no-underscore-dangle': 'off',
   },
 };

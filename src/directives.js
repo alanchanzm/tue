@@ -27,7 +27,6 @@ function show(el, value = false) {
  * @param {string} classname
  */
 function style(el, value, classname) {
-  console.log(el, value, classname);
   el.classList[value ? 'add' : 'remove'](classname);
 }
 

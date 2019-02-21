@@ -28,7 +28,8 @@ class Vue {
     this.els = this.root.querySelectorAll(selector);
 
     this.scope = {};
-    this.bindings = {};
+    this._bindings = {};
+    this.bindings = this._bindings;
 
     this.init(options);
   }
@@ -41,6 +42,27 @@ class Vue {
     keys.forEach(key => {
       this.scope[key] = options.scope[key];
     });
+  }
+
+  destory() {
+    const keys = Object.keys(this._bindings);
+    keys.forEach(key => {
+      this._bindings[key].directives.forEach(directive => {
+        const { unbind } = directive.definition;
+        if (unbind) unbind(directive.el, directive.argument, directive);
+      });
+    });
+    // HACK
+    this.root.parentNode.remove(this.root);
+  }
+
+  dump() {
+    const data = {};
+    const keys = Object.keys(this._bindings);
+    keys.forEach(key => {
+      data[key] = this.bindings[key].value;
+    });
+    return data;
   }
 
   /**
